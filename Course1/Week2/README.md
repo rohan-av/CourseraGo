@@ -14,7 +14,7 @@ ip = &x
 y = *ip (y is now equal to the data at the address that IP is pointing to)
 ```
 
-`new()` creates a variable and returns a pointer to the variable; variable is initialized to 0.
+`new()`: creates a variable and returns a pointer to the variable; variable is initialized to 0
 
 ```
 ptr := new(int)
