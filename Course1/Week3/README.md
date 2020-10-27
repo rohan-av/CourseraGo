@@ -138,3 +138,7 @@ Initializing Structs
 
 - `p1 := new(Person)`
 - Struct literal: `p1 := Person(name: "joe", addr: "a st.", phone: "123")`
+
+## Other notes
+
+`"sort"` library can be used for sorts.
