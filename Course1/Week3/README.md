@@ -118,7 +118,7 @@ for key, val := range idMap {
 ## Structs
 
 ```
-type struct Person {
+type Person struct {
   name string
   addr string
   phone string
