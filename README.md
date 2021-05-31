@@ -7,7 +7,7 @@
 -   & operator returns the address of a variable/function
 -   \* operator returns data at an address (dereferencing)
 
-```
+```Go
 var x int = 1
 vay y int
 var ip *int // ip is pointer to int
@@ -18,7 +18,7 @@ y = *ip (y is now equal to the data at the address that IP is pointing to)
 
 `new()`: creates a variable and returns a pointer to the variable; variable is initialized to 0
 
-```
+```Go
 ptr := new(int)
 *ptr = 3
 ```
@@ -48,7 +48,13 @@ Active garbage collection done in the background.
 
 ## Comments, Printing, Integers
 
-Comments: `// This is a comment` `/* this is a multi-line comment`
+Comments: `// This is a comment`
+
+```Go
+/* this is a
+multi-line comment */
+```
+
 Printing: `fmt.Printf()`
 
 -   Format strings
@@ -153,7 +159,7 @@ Each constant is assigned to a unique integer.
 
 ## Control Flow
 
-```
+```Go
 if x > 5 {
   // do thing
 } else {
@@ -192,7 +198,6 @@ case x < -1:
 default:
   // do thing
 }
-
 ```
 
 Break and continue exist just as in other languages.
@@ -306,7 +311,7 @@ idMap = make(map[string]int)
 
 Map Literal
 
--   `idMap := map[string][int] { "joe": 123}`
+-   `idMap := map[string]int{"joe": 123}`
 
 Accessing Maps
 
@@ -391,7 +396,7 @@ Properties
 
 JSON Marshalling: generating JSON representation from an object
 
-```
+```Go
 p1 := Person(name: "Joe", addr: "A St.", phone: "123")
 
 barr, err := json.Marshal(p1)
@@ -399,7 +404,7 @@ barr, err := json.Marshal(p1)
 
 `Marshal()` returns JSON representation as `[]byte`.
 
-```
+```Go
 var p2 Person
 
 err := json.Unmarshal(barr, &p2)
@@ -420,7 +425,7 @@ err := json.Unmarshal(barr, &p2)
 
 **`ioutil` File Read**
 
-```
+```Go
 dat, e := ioutil.ReadFile("test.txt")
 ```
 
@@ -430,7 +435,7 @@ dat, e := ioutil.ReadFile("test.txt")
 
 **`ioutil` File Write**
 
-```
+```Go
 dat = "Hello, world"
 
 err := ioutil.WriteFile("outfile.txt", dat, 0777)
@@ -449,7 +454,7 @@ err := ioutil.WriteFile("outfile.txt", dat, 0777)
 -   Controls the amount read (fills the `[]byte`)
 -   returns no. of bytes read
 
-```
+```Go
 f, err := os.Open("dt.txt")
 barr := make([]byte, 10)
 nb, err := f.Read(barr)
@@ -459,7 +464,7 @@ f.close()
 `Write()`: writes a `[]byte`
 `WriteString()`: writes a string (any Unicode sequence)
 
-```
+```Go
 f, err := os.Create("outfile.txt")
 
 barr := []byte{1, 2, 3}
@@ -475,7 +480,7 @@ nb, err := f.WriteString("Hi")
 
 **Parameters** are listed in parenthesis after function name.
 
-```
+```Go
 func foo(x, y int) {
   fmt.Printf(x * y)
 }
@@ -483,7 +488,7 @@ func foo(x, y int) {
 
 **Return values** are after pramaters in declaration.
 
-```
+```Go
 func foo(x int) int {
   return x + 1
 }
@@ -508,7 +513,7 @@ Call by Reference
 
 -   Pass a pointer as an argument
 
-```
+```Go
 func foo(y *int) {
   *y m= *y + 1
 }
@@ -531,7 +536,7 @@ Passing Array Arguments
 -   Arrays can be big, so this can be a problem
 -   Pass array pointers instead (unnecessary in Golang)
 
-```
+```Go
 func foo (x *[3]int) int {
   (*x)[0] = (*x)[0] + 1
 }
@@ -546,7 +551,7 @@ func main() {
 -   Pass slices instead
     -   Slices contain a pointer to the array --> Passing a slice copies the pointer
 
-```
+```Go
 func foo(sli []int) int {
   sli[0] = sli[0] + 1
 }
@@ -569,7 +574,7 @@ Functions are **_first-class_**: being able to treat a function like any other t
 -   Can be passed as argumetns and returned as values
 -   Can be stored in data structures
 
-```
+```Go
 var funcVar func(int) int
 
 func incFn(x int)  int  {
@@ -582,7 +587,7 @@ func main() {
 }
 ```
 
-```
+```Go
 func applyIt(afunct func (int) int, val int) int  {
   return afunct(val)
 }
@@ -590,7 +595,7 @@ func applyIt(afunct func (int) int, val int) int  {
 
 Anonymous functions
 
-```
+```Go
 func main() {
   v := applyIt(func (x int) int {return x + 1}, 2)
   fmt.Println(v)
@@ -601,7 +606,7 @@ func main() {
 
 Can be used to create a function with controllable parameters.
 
-```
+```Go
 func MakeDistOrigin (o_x, o_y float64) func (float64, float64) float64 {
   fn := func(x, y float64) float64 {
     return math.Sqrt(math.Pow(x - o_x, 2) + math.Pow(y - o_y, 2))
@@ -625,7 +630,7 @@ Variable Argument Number (in Variadic Functions)
 -   Treated as a slice inside function
 -   Can pass a slice to a variadic function as well
 
-```
+```Go
 func getMax(vals ...int) int {
   maxV := 1
   for _, v := range vals {
@@ -642,7 +647,7 @@ Deferred Function Calls
 -   Call can be deferred until the surrounding function completes
 -   Typically used for cleanup activities
 
-```
+```Go
 func main() {
   defer fmt.Println("Bye!")
   fmt.Println("Hello!")
@@ -660,7 +665,7 @@ Go has no `class` keyword.
 -   Method has a **_receiver type_** that it is associated with
 -   Use dot notation to call the method
 
-```
+```Go
 type MyInt int
 
 func (mi MyInt) Double () int { // (mi MyInt) is the receiver type
@@ -675,7 +680,7 @@ func main() {
 
 The receiver type can be a struct of some kind.
 
-```
+```Go
 func (p Point) DistToOrig() {
   t := math.Pow(p.x, 2) + math.Pow(p.y, 2)
   return math.Sqrt(t)
@@ -693,14 +698,14 @@ Controlling Access
 
 -   Can define public functions to allow access to hidden data
 
-```
+```Go
 package data
 
 var x int = 1
 func PrintX() {fmt.Println(x)}
 ```
 
-```
+```Go
 package main
 
 import "data"
@@ -712,7 +717,7 @@ func main() {
 
 -   For structs, hide fields of structs by starting field name with a lower-case letter
 
-```
+```Go
 package main
 func main() {
   var p data.Point
@@ -726,7 +731,7 @@ func main() {
 
 The receiver object is implicity passed as an argument, and argument passing in Go is call by value. Hence, the method cannot directly modify the data inside the receiver object. The solution is to make the receiver type a pointer.
 
-```
+```Go
 func (p *Point) OffsetX(v float64) {
   p.x = p.x + v
 }
@@ -763,7 +768,7 @@ A type _satisfies an interface_ if it defines all methods specified in the inter
 
 Defining an interface
 
-```
+```Go
 type Shape2D interface {
   Area() float64
   Perimeter() float64
@@ -798,7 +803,7 @@ Interface Values
     -   Dynamic Value: Value of the dynamic type
 -   An interface can have a nil dynamic value (check whether dynamic value is nil before calling method!)
 
-```
+```Go
 var s1 Speaker
 var d1 *Dog // Speak() method defined in Dog
 s1 = d1
@@ -812,7 +817,7 @@ Ways to use an interface
 
 -   Need a function which takes multiple types of parameter
 
-```
+```Go
 func FitInYard(s Shape2D) bool {
   if (s.Area() > 100 && s.Perimeter <> 100) {
     return true
@@ -827,7 +832,7 @@ Empty Interface
 -   All types satisfy the empty interface
 -   Use it to have a function accept any type as a parameter
 
-```
+```Go
 func PrintMe(val interface{}) {
   fmt.Println(val)
 }
@@ -839,7 +844,7 @@ Interfaces hide the differences between types. Sometimes you need to treat diffe
 
 Type Assertions
 
-```
+```Go
 func DrawShape(s Shape2D) bool {
   rect, ok := s.(Rectangle)
   if ok {
@@ -854,7 +859,7 @@ func DrawShape(s Shape2D) bool {
 
 Type Switch
 
-```
+```Go
 func DrawShape(s Shape2D) bool {
   switch sh := s.(type) {
   case Rectangle:
@@ -871,7 +876,7 @@ Error Interface
 
 -   Many Go programs return error interface objects to indicate errors
 
-```
+```Go
 type error interface {
   Error() string
 }
@@ -1028,7 +1033,7 @@ Creating a Goroutine
 -   One goroutine is created automatically to execute the `main()`
 -   Other goroutines are created using the `go` keyword
 
-```
+```Go
 a = 1
 go foo() // newly created sub-goroutine
 a = 2
@@ -1076,7 +1081,7 @@ Sync WaitGroup
 
 Main thread:
 
-```
+```Go
 var wg sync.WaitGroup
 wg.Add(1)
 go foo(&wg)
@@ -1085,7 +1090,7 @@ wg.Wait()
 
 Foo thread:
 
-```
+```Go
 wg.Done()
 ```
 
@@ -1110,7 +1115,7 @@ Channels
 
 E.g.
 
-```
+```Go
 func prod(v1 int, v2 int, c chan int) {
   c <- v1 * v2
 }
@@ -1162,7 +1167,7 @@ Use of Buffering
 
 Iterating Through a Channel
 
-```
+```Go
 for i := range c {
   fmt.Println(i)
 }
@@ -1175,7 +1180,7 @@ Receiving from Multiple Goroutines
 -   Multiple channels may be used to receive from multiple sources
 -   One option: Read sequentially
 
-```
+```Go
 a := <- c1
 b := <- c2
 fmt.Println(a*b) // waits on both channels
@@ -1188,7 +1193,7 @@ Select Statement
 -   May have a choice of which data to use (first-come first-served)
 -   Use the `select` statement to wait on the first data from a set of channels
 
-```
+```Go
 select {
   case a = <- c1:
     fmt.println(a)
@@ -1199,7 +1204,7 @@ select {
 
 -   May select either send or receive operations
 
-```
+```Go
 select {
   case a = <- inchan:
     fmt.Println("Received a")
@@ -1217,7 +1222,7 @@ Default Select
 
 -   May want a default operation to avoid blocking
 
-```
+```Go
 select {
   case a = <- c1:
     fmt.Println(a)
@@ -1247,7 +1252,7 @@ sync.Mutex
 -   `Unlock()` method puts the flag down (done using shared variable)
 -   When `Unlock()` is called, a blocked `Lock()` can proceed
 
-```
+```Go
 var i int = 0
 var mut sync.Mutex
 func inc() {
@@ -1272,7 +1277,7 @@ sync.Once
 -   Function `f` is executed only one time (even if it called in multiple goroutines)
 -   All calls to `once.Do()` block until the first returns (ensured that initialization executes first)
 
-```
+```Go
 var on sync.Once
 var wg sync.WaitGroup
 
@@ -1298,7 +1303,7 @@ func main() {
 
 Synchronization causes the execution of different goroutines to depend on each other. Circular synchronization dependencies cause all involved goroutines to block.
 
-```
+```Go
 func dostuff(c1 chan int, c2 chan int) {
   <- c1
   c2 <- 1
@@ -1324,7 +1329,7 @@ Deadlock Detection
 
 ## Dining Philosophers
 
-```
+```Go
 type ChopS struct { sync.Mutex }
 
 type Philo struct {
