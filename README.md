@@ -70,7 +70,7 @@ Integers
 
 Type Conversions
 
-```
+```Go
 var x int32 = 1
 vay y int16 = 2
 x = int32(y)
@@ -130,7 +130,7 @@ Strconv Package
 
 Type is inferred from righthand.
 
-```
+```Go
 const x = 1.3
 const (
   y = 4
@@ -144,7 +144,7 @@ const (
 -   actual value is not important
 -   similar to enum
 
-```
+```Go
 type Grades int
 const (
   A Grades = iota
@@ -209,7 +209,7 @@ Takes a pointer as an argument.
 Types data is writtern to pointer.
 Returns number of scanned items.
 
-```
+```Go
 var appleNum int
 fmt.Printf("Number of apples?")
 
@@ -224,7 +224,7 @@ num, err := fmt.Scan(&appleNum)
 -   Elements accessed usin []
 -   Elements initialized to zero value
 
-```
+```Go
 var x [5]int
 x[0] = 2
 fmt.Printf(x[1]) // 0
@@ -237,7 +237,7 @@ fmt.Printf(x[1]) // 0
 
 **Iterating through arrays**
 
-```
+```Go
 x := [3]int {1, 2, 3}
 
 for i, v range x {
@@ -262,7 +262,7 @@ Three Properties:
 -   Capacity: max number of elements
     -   From start of slice to end of array
 
-```
+```Go
 arr := [...]string{"a","b","c","d","e","f","g"}
 s1 := arr[1:3] // elements 1 and 2
 s2 := arr[2:5]
@@ -281,7 +281,7 @@ Slice Literals
 -   Creates the underlying array and creates a slice to reference it
 -   Slice points to the start of the array, length is capacity
 
-```
+```Go
 sli := []int{1, 2, 3} // empty brackets --> slice
 ```
 
@@ -304,7 +304,7 @@ sli := []int{1, 2, 3} // empty brackets --> slice
 
 Go's implementation of a hash table
 
-```
+```Go
 var idMap map[string]int // map[key]value
 idMap = make(map[string]int)
 ```
@@ -327,7 +327,7 @@ Other Map Functions
 
 Iterating through a Map
 
-```
+```Go
 for key, val := range idMap {
   fmt.Println(key, val)
 }
@@ -335,7 +335,7 @@ for key, val := range idMap {
 
 ## Structs
 
-```
+```Go
 type Person struct {
   name string
   addr string
@@ -347,7 +347,7 @@ var p1 Person
 
 Accessing Struct Fields
 
-```
+```Go
 p1.name = "joe"
 x= p1.addr
 ```
